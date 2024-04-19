@@ -1,0 +1,9 @@
+name: Test building book
+
+on: [push, pull_request]
+
+jobs:
+  test-building-book:
+    uses: ./.github/workflows/test-book.yml
+    with:
+      docker-image: ghcr.io/${{ github.repository }}:latest

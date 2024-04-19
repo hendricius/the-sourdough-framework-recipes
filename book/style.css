@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;800&display=swap');
+
+:root{
+  --ff-sans: 'Open Sans', sans-serif;
+  --fw-regular: 400;
+  --fw-bold: 800;
+  --f-lh: 28px;
+  --c-black: #282828;
+  --fs-xxxl: 32px;
+  --fs-xxl: 26px;
+  --fs-xl: 24px;
+  --fs-l: 22px;
+  --fs-m: 16px;
+  --padding-hamburger: 5px;
+}
+
+@media (min-width: 1200px){
+  :root {
+    font-size: 1.5vw;
+  }
+}
+
+/* Maximal font size should be 24px, so stop font scalling at some point (24 / (1.5/100)) */
+
+@media (min-width: 1500px){
+  :root {
+    font-size: 20px;
+  }
+}
+
+/* ************** */
+/* *** Layout *** */
+/* ************** */
+
+body{
+  margin:0;
+  padding:0;
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-m);
+}
+
+@media screen and (min-width: 57rem) {
+  body{
+    display:grid;
+    grid-template-columns: 15rem 1fr;
+  }
+  main.main-content, main.titlepage, div.footnotes{max-width:40rem;grid-column: 2}
+  main.titlepage {grid-row: 1;}
+  nav.TOC{
+    grid-row:1;
+    grid-column: 1;
+    min-height:100vh;
+  }
+}
+
+
+/* ****************** */
+/* *** Formatting *** */
+/* ****************** */
+
+main.main-content,main.titlepage,div.footnotes{
+  padding:1rem;
+}
+
+.permalink {
+  opacity: 0.5;
+  text-decoration: none;
+  font-size: 0.75rem;
+  line-height: 0.8rem;
+  margin-left: 0.25rem;
+  color: black;
+  display: inline-block;
+}
+
+.sectionHead, .subsectionHead {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+p.indent, p.noindent{
+  text-indent: 0;
+  text-align: justify;
+}
+/* code{font-size:1.4rem;} */
+/* figure pre.listings{font-size: 1.4rem;} */
+figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
+  margin:0.5rem 0; 
+  padding-left:0.5rem; 
+  overflow:auto;
+}
+figure pre.listings{font-size: 1em;}
+
+.chapterToc, .sectionToc, .subsectionToc{margin:0;padding:0;}
+nav.TOC{
+  font-size:0; /* trick to remove vertical space above TOC entries */
+}
+
+ .chapterToc ~ .likesectionToc, .chapterToc ~ .sectionToc, .likechapterToc ~ .likesectionToc, .likechapterToc ~ .sectionToc {padding-left:2em;margin-left:0}
+ .chapterToc ~ .likesectionToc ~ .likesubsectionToc, .chapterToc ~ .likesectionToc ~ .subsectionToc, .chapterToc ~ .sectionToc ~ .likesubsectionToc, .chapterToc ~ .sectionToc ~ .subsectionToc, .likechapterToc ~ .likesectionToc ~ .likesubsectionToc, .likechapterToc ~ .likesectionToc ~ .subsectionToc, .likechapterToc ~ .sectionToc ~ .likesubsectionToc, .likechapterToc ~ .sectionToc ~ .subsectionToc {padding-left:4em;margin-left:0;}
+
+nav.TOC span{
+  margin-top:0;
+  font-size: 16px;
+}
+
+nav.TOC a, nav.TOC a:visited{
+  text-decoration:none;
+}
+
+.chapterToc,
+.sectionToc,
+.subsectionToc,
+.likechapterToc {
+  display: block;
+}
+
+.chapterToc a,
+.sectionToc a,
+.subsectionToc a,
+.likechapterToc a {
+  display: flex;
+  flex-grow: 1;
+  padding: 7px 10px 7px 15px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.chapterToc span,
+.sectionToc span,
+.subsectionToc span {
+  display: block;
+}
+
+.chapterToc .chapter_number, .sectionToc .chapter_number, .subsectionToc .chapter_number {
+  margin-right: 7px;
+  white-space: nowrap;
+}
+
+/* ************** */
+/* *** Colors *** */
+/* ************** */
+
+
+body{
+  background-color: var(--c-black);
+}
+
+a {
+  color: #5D9FF0;
+}
+
+main.main-content, div.footnotes, main.titlepage{
+  background-color:white;
+}
+
+nav.TOC,nav.TOC a, nav.TOC a:visited{
+  background-color: var(--c-black);
+  color:#fff;
+}
+
+nav.TOC span:hover,
+nav.TOC span:hover *,
+nav.TOC span.chapterToc.selected,
+nav.TOC span.chapterToc.selected a {
+  background-color:#5b5a58;
+}
+
+figure.texsource, figure.shellcommand, figure.htmlsource, figure.luasource, figure.textsource{
+  border:1px solid #cec1aa;
+  background-color:#d5e3c6;
+}
+
+.main-content {
+  line-height: var(--f-lh);
+}
+
+div.footnotes {
+  border: none;
+  margin-right: 0;
+}
+
+.footnote-mark {
+  margin-right: 3px;
+}
+
+table.tabular {
+  width: 100%;
+}
+
+figure.figure {
+  margin: 30px 0px 30px 0px;;
+  text-align: center;
+  padding: 0;
+}
+
+figcaption.caption {
+  text-indent: 0;
+  margin: 0;
+}
+
+.table div.center, .table div.center div.center {
+  margin: 0;
+}
+
+.table, div.tabular {
+  overflow-x: auto;
+}
+
+.table table {
+  width: 100%;
+}
+
+.menu {
+  position: relative;
+}
+
+.toggle-menu-label {
+  display: none;
+}
+
+.menu input {
+  display: none;
+}
+
+.menu-items {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-items .chapterToc, .menu-items .likechapterToc {
+  display: block;
+}
+
+.menu-items a {
+  text-decoration: none;
+}
+
+.home-link {
+  display: block;
+}
+
+.home-title {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .toggle-menu-label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .hamb{
+    cursor: pointer;
+    padding: var(--padding-hamburger);
+    margin-right: calc(var(--padding-hamburger) * -1);
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .hamb-line {
+    display: block;
+    filter: brightness(0) invert(1);
+    background: url("menu.svg") no-repeat center center;
+    background-size: contain;
+    width: 30px;
+    height: 30px;
+    font-size: 0px;
+  }
+
+  span.hamb-line:hover  {
+    background-color: transparent !important;
+    font-size: 0px;
+  }
+
+  .menu-items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--c-black);
+    z-index: 1;
+  }
+
+  .menu {
+    background: var(--c-black);
+    display: flex;
+    padding: 10px 1rem;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #toggle-menu:checked ~ .menu-items {
+    display: block;
+  }
+  #toggle-menu:checked ~ .toggle-menu-label span {
+    background-image: url("close.svg");
+    background-color: transparent !important;
+  }
+
+  .logo {
+    display: block;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .chapterToc a, .sectionToc a, .subsectionToc a, .likechapterToc a {
+    padding-left: 17px;
+  }
+
+  .menu-items .chapterToc.home-link {
+    display: none;
+  }
+
+  .home-title {
+    display: none;
+  }
+}
+
+div.center {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+main.titlepage h2.chapterHead {
+  margin-top: 0px;
+}
+
+h1 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-xxxl);
+}
+
+h2 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-xxl);
+}
+
+h3 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-xl);
+}
+
+h4 {
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  font-size: var(--fs-l);
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-bread {
+  max-width: 100%;
+  margin-top: 1em;
+}

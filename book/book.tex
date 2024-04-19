@@ -1,0 +1,41 @@
+\documentclass[paper=a4, twoside=false, fontsize=12pt, parskip=half,
+                bibliography=totoc, listof=totoc]{scrbook}
+
+% General packages
+\usepackage{sourdough}
+
+% Basic attributes
+\author{Hendrik Kleinwächter}
+\title{The Sourdough Framework Recipes}
+
+\begin{document}
+\input{cover/cover.tex}
+\titlepage
+
+\frontmatter
+{%
+\hypersetup{hidelinks}
+\ifdefined\HCode\else\tableofcontents\fi
+}
+
+\input{preface/preface}
+
+\mainmatter
+
+\chapter{Introduction}%
+\input{introduction/introduction}
+
+\chapter{Whole-grain sandwich loaf}%
+\input{whole-grain-sandwich/whole-grain-sandwich}
+
+\chapter{Brioche buns}%
+\input{brioche-buns/brioche-buns}
+
+\chapter{Naan}%
+\input{naan/naan}
+
+\chapter{Chocolate chip cookies}%
+\input{chocolate-chip-cookies/chocolate-chip-cookies}
+
+
+\end{document}
