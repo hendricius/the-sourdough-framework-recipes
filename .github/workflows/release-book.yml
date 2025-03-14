@@ -65,15 +65,16 @@ jobs:
           run: |
             cd /app/book
             make -j bake
-      - name: Release baked book to S3
-        uses: shallwefootball/s3-upload-action@master
+      - name: Copy book to downloads server
+        uses: burnett01/rsync-deployments@7.0.2
         with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET_BOOK }}
-          source_dir: book/release
-          destination_dir: release-recipes
-      - name: Upload book Artifacts
+          switches: "-avzr"
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USERNAME }}
+          remote_key: ${{ secrets.SSH_KEY }}
+          path: "book/release/*"
+          remote_path: "~/downloads/the-sourdough-framework-recipes/"
+      - name: Upload book artifacts to GitHub
         uses: actions/upload-artifact@v3
         with:
           name: books
@@ -81,15 +82,3 @@ jobs:
             book/book_serif/book.log
             book/book_serif/book.pdf
             book/book-epub/book.epub
-  invalidate-book-cache:
-    needs: release-book-website
-    runs-on: ubuntu-latest
-    steps:
-      - name: Invalidate Cloudfront book cache
-        uses: chetan/invalidate-cloudfront-action@v2
-        env:
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_DISTRIBUTION_BOOK }}
-          PATHS: "/*"
-          AWS_REGION: "us-east-1"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
