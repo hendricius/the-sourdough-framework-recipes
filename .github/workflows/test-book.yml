@@ -45,8 +45,8 @@ jobs:
           run: |
             cd /app/book
             make build_ebook
-      - name: Upload book Artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload book artifacts to GitHub
+        uses: actions/upload-artifact@v4
         with:
           name: books
           path: |

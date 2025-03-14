@@ -75,7 +75,7 @@ jobs:
           path: "book/release/*"
           remote_path: "~/downloads/the-sourdough-framework-recipes/"
       - name: Upload book artifacts to GitHub
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: books
           path: |
